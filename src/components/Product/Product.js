@@ -1,9 +1,11 @@
 import React from 'react';
 import './Product.css';
+import { Link } from 'react-router-dom';
 
 
 const Product = (props) => {
-    const {name, img, price, stock, seller} = props.product;
+    //console.log(props);
+    const {name, img, price, stock, seller, key} = props.product; 
     
     return (
         <div className="product">
@@ -11,11 +13,16 @@ const Product = (props) => {
                 <img src={img} alt=""></img>
             </div>
             <div className="product-name">
-                <h4>{name}</h4>
+                <h4> <Link to={"/product/" + key}>{name}</Link> </h4>
                 <h4>by: {seller}</h4>
                 <p><small>${price}</small></p>
                 <p><small>$only {stock} left in stock - order soon</small></p>
-                <button className="button" onClick={() => props.handleAddProduct(props.product)}>add to cart</button>
+                {
+                    props.showAddToCart && <button className="button" onClick={() => 
+                    props.handleAddProduct(props.product)}>add to cart
+                    </button>
+                }
+                
             </div>        
         </div>
         
